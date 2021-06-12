@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const { prefix } = require('./config.json');
-const token = require('./token.json');
+const { token } = require('./token.json');
 const client = new Discord.Client();
 
 client.once('ready', () => {
@@ -10,13 +10,24 @@ client.once('ready', () => {
 client.login(token);
 
 client.on('message', message => {
-	if (message.content === `${prefix}ping`) {
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).trim().split(' ');
+	const command = args.shift().toLowerCase();
+	// ...
+});
+
+client.on('message', message => {
+	// ...
+	// Using the new `command` variable, this makes it easier to manage!
+	// You can switch your other commands to this format as well
+	if (command === 'ping') {
 		message.channel.send('Pong.');
-	}
-	else if (message.content === `${prefix}beep`) {
-		message.channel.send('Boop.');
-	}
-	else if (message.content === `${prefix}server`) {
-		message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+	} else if (command === 'args-info') {
+		if (!args.length) {
+			return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+		}
+
+		message.channel.send(`Command name: ${command}\nArguments: ${args}`);
 	}
 });
