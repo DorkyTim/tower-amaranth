@@ -1,0 +1,17 @@
+{
+  "module export for bot commands": {
+    "prefix": "cm",
+    "body": [
+      "/* eslint-disable no-unused-vars */",
+      "const { prefix } = require('../../config.json');",
+      "module.exports = {",
+      "\tname: '$1',",
+      "\tdescription: prefix + '$2',",
+      "\texecute(message, args) {",
+      "\t\t$0",
+      "\t},",
+      "};"
+    ],
+    "description": "module export for bot commands"
+  }
+}
