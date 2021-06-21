@@ -5,7 +5,8 @@ module.exports = {
 	description: prefix + 'transfer',
 	execute(message, args) {
 		const currentAmount = message.client.currency.getBalance(message.author.id);
-		const transferAmount = args.split(/ +/g).find(arg => !/<@!?\d+>/g.test(arg));
+		const transferAmount = args.find(arg => !/<@!?\d+>/g.test(arg));
+		// Right now it works with mentions, but not with straight ID text: !transfer <amount> @user
 		const transferTarget = message.mentions.users.first();
 
 		if (!transferAmount || isNaN(transferAmount)) return message.channel.send(`Sorry ${message.author}, that's an invalid amount.`);
