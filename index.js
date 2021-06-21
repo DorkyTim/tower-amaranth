@@ -1,3 +1,4 @@
+require('dotenv').config();
 const fs = require('fs');
 const Discord = require('discord.js');
 
@@ -20,7 +21,7 @@ const {
 	// GeneralShop,
 } = require('./dbObjects');
 const { prefix } = require('./config.json');
-const { token } = require('./token.json');
+// const { token } = require('./token.json');
 
 Reflect.defineProperty(client.currency, 'add', {
 	/* eslint-disable-next-line func-name-matching */
@@ -76,4 +77,4 @@ client.on('message', async message => {
 
 });
 
-client.login(token);
+client.login(process.env.token);
