@@ -1,11 +1,12 @@
+require('dotenv').config();
+const config = require('./config.json');
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('database', 'username', 'password', {
-	host: 'localhost',
-	dialect: 'sqlite',
-	logging: false,
-	storage: 'database.sqlite',
-});
+// console.debug(process.env.DATABASE_URL);
+
+const sequelize = (process.env.ENV != 'prod') ?
+	new Sequelize(process.env.DATABASE_URL, config.dev) :
+	new Sequelize(process.env.DATABASE_URL, config.prod);
 
 const Players = require('./models/Players')(sequelize, Sequelize.DataTypes);
 const GeneralShop = require('./models/GeneralShop')(sequelize, Sequelize.DataTypes);
