@@ -1,15 +1,18 @@
 {
 	"prefix": "!",
-	"dev" : {
+	"dev": {
 		"dialect": "postgres",
 		"protocol": "postgres",
 		"logging": false
 	},
-	"prod" : {
+	"prod": {
 		"dialect": "postgres",
 		"protocol": "postgres",
 		"dialectOptions": {
-			"ssl": true
+			"ssl": {
+				"require": true,
+				"rejectUnauthorized": false
+			}
 		},
 		"logging": false
 	}
