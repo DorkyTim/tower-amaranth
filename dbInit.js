@@ -4,6 +4,7 @@ const Sequelize = require('sequelize');
 
 // console.debug(process.env.DATABASE_URL);
 
+// checks to see environment value to decide which connection string to use
 const sequelize = (process.env.ENV != 'prod') ?
 	new Sequelize(process.env.DATABASE_URL, config.dev) :
 	new Sequelize(process.env.DATABASE_URL, config.prod);
